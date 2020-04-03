@@ -1,0 +1,26 @@
+server:
+  port: 8092
+  servlet:
+    context-path: /
+spring:
+  #数据源
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      data-master:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/data-master?useUnicode=true&useSSL=false&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
+        username: root
+        password: root
+      data-slave:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/data-slave?useUnicode=true&useSSL=false&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
+        username: root
+        password: root
+mybatis:
+ mapper-locations: classpath:mapper/*.xml
+#通用mapper
+mapper:
+  safeDelete: true
+  safeUpdate: true
+  enableMethodAnnotation: true
