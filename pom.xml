@@ -11,6 +11,7 @@
 	<groupId>com</groupId>
 	<artifactId>xiaobin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>xiaobin</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -96,6 +97,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>mysql-master-slave</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
