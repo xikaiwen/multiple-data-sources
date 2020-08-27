@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  * @since 2020/4/2 12:02 PM
  */
 @Aspect
-@Component
+//@Component
 public class DataSourceAspect {
 
     @Pointcut("@annotation(com.xiaobin.annotation.DataSource)")

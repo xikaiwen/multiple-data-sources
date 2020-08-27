@@ -1,7 +1,10 @@
 package com.xiaobin.web.service;
 
 
+import com.github.pagehelper.PageInfo;
 import com.xiaobin.web.entity.User;
+
+import java.util.List;
 
 /**
  * @author kevin
@@ -10,4 +13,8 @@ import com.xiaobin.web.entity.User;
 public interface IUserService {
 
     User findUserName(Integer id);
+
+    List<User> getMasterByMapper();
+
+    PageInfo<User> findListByPage();
 }

@@ -22,6 +22,7 @@
 		<shiro.version>1.3.2</shiro.version>
 		<mybatis-spring-boot.version>1.3.0</mybatis-spring-boot.version>
 		<dubbo.version>2.7.3</dubbo.version>
+		<pagehelper-spring-boot.version>1.2.12</pagehelper-spring-boot.version>
 	</properties>
 
 	<dependencies>
@@ -67,6 +68,13 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!--pagehelper-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>${pagehelper-spring-boot.version}</version>
 		</dependency>
 
 		<dependency>

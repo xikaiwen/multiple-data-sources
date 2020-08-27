@@ -1,6 +1,7 @@
-package com.xiaobin.web.dao;
+package com.xiaobin.slave.dao;
 
 import com.xiaobin.base.dao.BaseDao;
+import com.xiaobin.slave.entity.SlaveUser;
 import com.xiaobin.web.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,6 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface UserDao extends BaseDao<User> {
-    List<User> findAll();
+public interface SlaveUserDao extends BaseDao<SlaveUser> {
+    List<SlaveUser> findAll();
 }

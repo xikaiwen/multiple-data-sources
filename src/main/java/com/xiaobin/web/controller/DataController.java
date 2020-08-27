@@ -1,7 +1,8 @@
 package com.xiaobin.web.controller;
 
-import com.xiaobin.annotation.DataSource;
-import com.xiaobin.web.dao.UserDao;
+import com.github.pagehelper.PageInfo;
+import com.xiaobin.slave.entity.SlaveUser;
+import com.xiaobin.slave.service.ISlaveUserService;
 import com.xiaobin.web.entity.User;
 import com.xiaobin.web.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author kevin
@@ -22,34 +26,68 @@ public class DataController {
     private IUserService userService;
 
     @Autowired
-    private UserDao userDao;
+    private ISlaveUserService slaveUserService;
 
     /**
-     * 一定要加DataSource注解不然切面获取不到
+     * 获取master数据库数据
+     * @param id
+     * @return
      */
-    @DataSource(name = "data-master")
     @GetMapping("getMasterName/{id}")
     public String getMasterName(@PathVariable Integer id){
         User user = userService.findUserName(id);
         return user.getName();
     }
 
-    @DataSource(name = "data-slave")
+    /**
+     * 获取slave数据库数据
+     * @param id
+     * @return
+     */
     @GetMapping("getSlaveName/{id}")
     public String getSlaveName(@PathVariable Integer id){
-        User user = userService.findUserName(id);
+        SlaveUser user = slaveUserService.findUserName(id);
         return user.getName();
     }
 
-    @DataSource(name = "data-slave")
-    @GetMapping("queryAllWithSlave")
-    public Object queryAllWithSlave(){
-        return userDao.queryAllWithSlave();
+    /**
+     * 通过mapper获取master数据库数据
+     */
+    @GetMapping("getMasterByMapper")
+    public Object getMasterByMapper(){
+        List<User> user = userService.getMasterByMapper();
+        return user;
     }
 
-    @DataSource(name = "data-master")
-    @GetMapping("queryAllWithMaster")
-    public Object queryAllWithMaster(){
-        return userDao.queryAllWithMaster();
+    /**
+     * 通过mapper获取slave数据库数据
+     */
+    @GetMapping("getSlaveByMapper")
+    public Object getSlaveByMapper(){
+        List<SlaveUser> user = slaveUserService.getSlaveByMapper();
+        return user;
     }
+
+    /**
+     * 同时查询两个数据库
+     * @return
+     */
+    @GetMapping("select2DataSource")
+    public Object select2DataSource(){
+        SlaveUser slaveUser = slaveUserService.findUserName(1);
+        User user = userService.findUserName(1);
+        return "master user name is:" + user.getName()+"------slave user name is: " + slaveUser.getName();
+    }
+
+    /**
+     * 分页查询测试
+     * @return
+     */
+    @GetMapping("selectByPageHelper")
+    public Object selectByPageHelper(){
+        PageInfo<SlaveUser> slaveUserPageInfo = slaveUserService.findListByPage();
+        PageInfo<User> userPageInfo = userService.findListByPage();
+        return userPageInfo;
+    }
+
 }

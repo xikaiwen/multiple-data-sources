@@ -44,7 +44,7 @@ public abstract class BaseEntity implements java.io.Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
 //    private String createTime;		// create_time
 //    private Integer createBy;		// create_by
